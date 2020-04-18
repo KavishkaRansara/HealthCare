@@ -37,7 +37,7 @@ public class AppointmentService {
 		String output = appointmentObj.insertAppointments(patientID, doctorID, appointmentDate, appointmentTime);  
 		return output; 
 	}
-	
+	//PUT METHOD
 	@PUT 
 	@Path("/") @Consumes(MediaType.APPLICATION_JSON) 
 	@Produces(MediaType.TEXT_PLAIN)
