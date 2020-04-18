@@ -13,6 +13,13 @@ public class HospitalService {
 	
 	Hospital hospitalObj = new Hospital(); 
 	
+	@GET
+	@Path("/")
+	@Produces(MediaType.TEXT_HTML)
+	public String readHospitals() {
+		return hospitalObj.readHospitals();
+	}
+	
 	@POST 
 	@Path("/") 
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED) 
