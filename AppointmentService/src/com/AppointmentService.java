@@ -23,7 +23,7 @@ public class AppointmentService {
 		return appointmentObj.readAppointments();
 	}
 	
-
+	//GET POST
 	@POST 
 	@Path("/") 
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED) 
