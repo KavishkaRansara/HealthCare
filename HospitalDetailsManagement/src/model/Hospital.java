@@ -127,6 +127,42 @@ public class Hospital {
 		}
 		return output;
 	}
+	
+	public String updateHospitals(String ID, String hName, String hProvince, String hDistrict, String hEmail, String hPhone, String hServices) 
+	{
+		String output = "";
+		
+		try   {   
+			Connection con = connect(); 
+		 
+		   if (con == null) 
+		   {
+			   return "Error while connecting to the database for updating.";
+		   }
+		 
+		   String query = "UPDATE hospital SET hospitalName=?,hospitalProvince=?,hospitalDistrict=?,hospitalEmail=?,hospitalPhone=?,hospitalServices=?  WHERE hospitalID=?"; 
+		   PreparedStatement preparedStmt = con.prepareStatement(query); 
+		   
+		   preparedStmt.setString(1, hName);    
+		   preparedStmt.setString(2, hProvince);    
+		   preparedStmt.setString(3, hDistrict);    
+		   preparedStmt.setString(4, hEmail);    
+		   preparedStmt.setString(5, hPhone);
+		   preparedStmt.setString(6, hServices);
+		   preparedStmt.setInt(7, Integer.parseInt(ID));
+		   
+		   preparedStmt.execute();    
+		   con.close();
+		   
+		   output = "Updated successfully";   
+		   }   
+		   catch (Exception e)  
+		   {   
+			   output = "Error while updating the hospital.";    
+			   System.err.println(e.getMessage());  
+		   } 
+		  return output;
+	}
 }
 	
 	
