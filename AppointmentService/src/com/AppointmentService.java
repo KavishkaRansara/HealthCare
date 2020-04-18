@@ -56,7 +56,7 @@ public class AppointmentService {
 		 return output; 
 		 
 	}
-	
+	//DELETE METHOD
 	@DELETE 
 	@Path("/") 
 	@Consumes(MediaType.APPLICATION_XML) 
