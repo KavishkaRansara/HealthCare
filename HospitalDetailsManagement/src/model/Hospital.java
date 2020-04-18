@@ -163,6 +163,37 @@ public class Hospital {
 		   } 
 		  return output;
 	}
+	
+	public String deleteHospitals(String hospitalID) 
+	{
+		String output = "";
+		 
+		try
+		{
+		Connection con = connect();
+		
+		 	if (con == null)
+		 	{
+		 		return "Error while connecting to the database for deleting.";
+		 	}
+		 
+		 String query = "delete from hospital where hospitalID=?";
+		 java.sql.PreparedStatement preparedStmt = con.prepareStatement(query);
+		 
+		 preparedStmt.setInt(1, Integer.parseInt(hospitalID));
+
+		 // execute the statement
+		 preparedStmt.execute();
+		 con.close();
+		 output = "Deleted successfully";
+		 }
+		 catch (Exception e)
+		 {
+		 output = "Error while deleting the hospital.";
+		 System.err.println(e.getMessage());
+		 }
+		return output;  
+	}
 }
 	
 	
