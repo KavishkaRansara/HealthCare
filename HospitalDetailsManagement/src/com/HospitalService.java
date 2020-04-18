@@ -1,6 +1,7 @@
 package com;
 
 import model.Hospital;
+
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import com.google.gson.*;
@@ -13,6 +14,7 @@ public class HospitalService {
 	
 	Hospital hospitalObj = new Hospital(); 
 	
+	//Call the read hospital method
 	@GET
 	@Path("/")
 	@Produces(MediaType.TEXT_HTML)
@@ -20,6 +22,7 @@ public class HospitalService {
 		return hospitalObj.readHospitals();
 	}
 	
+	//call the insert hospital method
 	@POST 
 	@Path("/") 
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED) 
@@ -35,6 +38,7 @@ public class HospitalService {
 		return output; 
 	}
 	
+	//call the update hospital method
 	@PUT 
 	@Path("/") @Consumes(MediaType.APPLICATION_JSON) 
 	@Produces(MediaType.TEXT_PLAIN)
@@ -55,6 +59,7 @@ public class HospitalService {
 		 
 	}
 	
+	//call the delete hospital method
 	@DELETE 
 	@Path("/") 
 	@Consumes(MediaType.APPLICATION_XML) 
