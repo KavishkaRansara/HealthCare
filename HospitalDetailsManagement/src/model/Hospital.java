@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 
 public class Hospital {
 	
+	//get the connection with database 
 	public Connection connect()
 	{
 	 Connection con = null;
@@ -14,6 +15,8 @@ public class Hospital {
 	 try
 	 {
 	 Class.forName("com.mysql.jdbc.Driver");
+	 
+	 //provide valid details for get the connection
 	 con= DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/healthcaredb","root","root");
 	 
 	 //For testing
@@ -28,6 +31,8 @@ public class Hospital {
 	
 	}
 	
+	
+	//Inserting data into hospital
 	public String insertHospitals(String hName, String hProvince, String hDistrict, String hEmail,String hPhone,String hServices) 
 	{
 			
@@ -40,10 +45,11 @@ public class Hospital {
 			return "Error while connecting to the database"; 
 		} 
 	
-	
+		//Preapared statement creation
 		String query = " insert into hospital (hospitalID,hospitalName,hospitalProvince,hospitalDistrict,hospitalEmail,hospitalPhone,hospitalServices)" + " values (?,?,?,?,?,?,?)"; 
 		java.sql.PreparedStatement preparedStmt = con.prepareStatement(query);
 		
+		//binding values into prepared statement
 		preparedStmt.setInt(1, 0);
 		preparedStmt.setString(2, hName);
 		preparedStmt.setString(3, hProvince);
@@ -63,6 +69,7 @@ public class Hospital {
 		return output; 
 	}
 	
+	//read Hospitals which are in the database
 	public String readHospitals() 
 	{
 		String output = "";
@@ -70,9 +77,12 @@ public class Hospital {
 		try {
 		Connection con = connect(); 
 			 
-			if (con == null) { 
+			if (con == null)
+			{ 
 				return "Error while connecting to the database for reading."; 
 			} 
+			
+			//Prepare html html to display data
 			output = "<table border=\"1\"><tr>"
 					+ "<th>Hospital ID</th>"
 					+ "<th>Hospital Name</th>"
@@ -88,6 +98,7 @@ public class Hospital {
 			java.sql.Statement stmt = con.createStatement();
 			ResultSet rs = stmt.executeQuery(query);
 			
+			//iterate through the rows in the result set.
 			while (rs.next()) 
 			{   
 				String hospitalID = Integer.toString(rs.getInt("hospitalID")); 
@@ -98,6 +109,7 @@ public class Hospital {
 				String hospitalPhone = rs.getString("hospitalPhone");
 				String hospitalServices = rs.getString("hospitalServices");
 				
+				//Add into html table
 				output += "<tr><td>" + hospitalID + "</td>";
 				output += "<td>" + hospitalName + "</td>";
 				output += "<td>" + hospitalProvince + "</td>";   
@@ -106,7 +118,7 @@ public class Hospital {
 				output += "<td>" + hospitalPhone + "</td>";
 				output += "<td>" + hospitalServices + "</td>";
 				
-				
+				//buttons
 				output += "<td><input name=\"btnUpdate\" "  
 					   + " type=\"button\" value=\"Update\"></td>"   
 					   + "<td><form method=\"post\" action=\"hospitals.jsp\">"
@@ -118,6 +130,8 @@ public class Hospital {
 			 
 			}
 			con.close(); 
+			
+			//close the html table 
 			output += "</table>";  
 		
 		}
@@ -128,6 +142,7 @@ public class Hospital {
 		return output;
 	}
 	
+	//Updating hospital details
 	public String updateHospitals(String ID, String hName, String hProvince, String hDistrict, String hEmail, String hPhone, String hServices) 
 	{
 		String output = "";
@@ -140,9 +155,11 @@ public class Hospital {
 			   return "Error while connecting to the database for updating.";
 		   }
 		 
+		   //create prepared statement
 		   String query = "UPDATE hospital SET hospitalName=?,hospitalProvince=?,hospitalDistrict=?,hospitalEmail=?,hospitalPhone=?,hospitalServices=?  WHERE hospitalID=?"; 
 		   PreparedStatement preparedStmt = con.prepareStatement(query); 
 		   
+		   //binding values
 		   preparedStmt.setString(1, hName);    
 		   preparedStmt.setString(2, hProvince);    
 		   preparedStmt.setString(3, hDistrict);    
@@ -151,6 +168,7 @@ public class Hospital {
 		   preparedStmt.setString(6, hServices);
 		   preparedStmt.setInt(7, Integer.parseInt(ID));
 		   
+		   //execute the statement
 		   preparedStmt.execute();    
 		   con.close();
 		   
@@ -177,9 +195,11 @@ public class Hospital {
 		 		return "Error while connecting to the database for deleting.";
 		 	}
 		 
+		 	//create prepared statement
 		 String query = "delete from hospital where hospitalID=?";
 		 java.sql.PreparedStatement preparedStmt = con.prepareStatement(query);
 		 
+		 //binding values
 		 preparedStmt.setInt(1, Integer.parseInt(hospitalID));
 
 		 // execute the statement
@@ -194,6 +214,8 @@ public class Hospital {
 		 }
 		return output;  
 	}
+	
+
 }
 	
 	
