@@ -76,5 +76,21 @@ public class DoctorService {
 		  
 		 
 	  }
+	   
+	   
+	   //for deleting doctor
+	   @DELETE
+	   @Path("/")
+	   @Consumes(MediaType.APPLICATION_XML)
+	   @Produces(MediaType.TEXT_PLAIN)
+	   public String deleteDoctor(String docData)
+	   {
+	   			//Convert the input string to an XML document
+	   			Document doc = Jsoup.parse(docData, "", Parser.xmlParser());
+	   			//Read the value from the element <itemID>
+	   			String doctorID = doc.select("docID").text();
+	   			String output = docObj.deleteDoctor(doctorID);
+	   			return output;
+	   }
 
 }
