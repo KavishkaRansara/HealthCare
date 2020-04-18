@@ -14,6 +14,10 @@ public class paymentService {
     @Path("/")
     @Produces(MediaType.TEXT_HTML)
     public String readPayment() {
-    	return "pay";
+    	String msg = "";
+    	if(pay.getconnection() !=  null) {
+    		msg = "success";
+    	}
+    	return msg;
     } 
 }
