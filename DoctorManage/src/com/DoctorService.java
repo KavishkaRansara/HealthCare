@@ -50,5 +50,31 @@ public class DoctorService {
 	}
 	
 	//insert and view is tested using POSTMAN
+	
+	
+	//for updating doctors
+	   @PUT
+	   @Path("/")
+	   @Produces(MediaType.TEXT_PLAIN)
+	   public String updateDoctor(String docData) {
+		
+		 //Convert the input string to a JSON object
+		  JsonObject docjObj = new JsonParser().parse(docData).getAsJsonObject();
+		  
+		//Read the values from the JSON object
+		  String doctorID= docjObj.get("docID").getAsString();
+		  String doctorName= docjObj.get("docName").getAsString();
+		  String specialization= docjObj.get("docSpec").getAsString();
+		  String hospital= docjObj.get("docHosp").getAsString();
+		  String contact = docjObj.get("docContact").getAsString();
+		  String email= docjObj.get("docEmail").getAsString();
+		  String status= docjObj.get("docStatus").getAsString();
+		  
+		  String output= docObj.updateDoctor(doctorID, doctorName,specialization,hospital,contact,email,status);
+		  return output;
+		  
+		  
+		 
+	  }
 
 }
