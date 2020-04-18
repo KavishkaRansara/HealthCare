@@ -49,6 +49,6 @@ public class DoctorService {
 			return output;
 	}
 	
-	
+	//insert and view is tested using POSTMAN
 
 }
