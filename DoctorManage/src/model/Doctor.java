@@ -26,6 +26,47 @@ public class Doctor {
 	}
 	
 	
+public String insertDoctor(String doctorName, String specialization, String hospital, String contact, String email, String status){
+	    
+	    String output = "";
+		
+		try{
+	         Connection con = connect();
+	         if (con == null)
+	         {
+	             return "Error while connecting to the database";
+	         }
+	        
+	        // create a prepared statement
+	        String query = " insert into doctors(`docID`,`docName`,`docSpec`,`docHosp`,`docContact`,`docEmail`,`docStat`)" + " values (?, ?, ?, ?, ?, ?, ?)";
+	        PreparedStatement preparedStmt = con.prepareStatement(query);
+
+	        // binding values
+	        preparedStmt.setInt(1, 0);
+	        preparedStmt.setString(2, doctorName);
+	        preparedStmt.setString(3, specialization);
+	        preparedStmt.setString(4, hospital);
+	        preparedStmt.setInt(5, Integer.parseInt(contact));
+	        preparedStmt.setString(6, email);
+	        preparedStmt.setString(7, status);
+
+	        //execute the statement
+	        preparedStmt.execute();
+	        con.close();
+
+	        output = "Inserted successfully";
+
+		}catch(Exception e){
+
+	        output = "Error while inserting";
+	        System.err.println(e.getMessage());
+		}
+
+		return output;
+
+	}
+	
+	
 	
 	public String readDoctor(){
 
