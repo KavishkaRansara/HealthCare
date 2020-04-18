@@ -32,5 +32,23 @@ public class DoctorService {
 		
 	}
 	
+	
+	//for inserting doctors	
+	@POST
+	@Path("/")
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	@Produces(MediaType.TEXT_PLAIN)
+	public String insertDoctor(   @FormParam("docName") String doctorName,
+								  @FormParam("docSpec") String specialization,
+								  @FormParam("docHosp") String hospital,
+								  @FormParam("docContact") String contact,
+								  @FormParam("docEmail") String email,
+								  @FormParam("docStatus") String status)
+	{
+			String output = docObj.insertDoctor(doctorName, specialization, hospital, contact, email, status);
+			return output;
+	}
+	
+	
 
 }
