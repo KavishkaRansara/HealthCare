@@ -21,7 +21,16 @@ public class DoctorService {
 	
 	Doctor docObj = new Doctor();
 	
+	//for viewing doctors
 	
+	@GET
+	@Path("/")
+	@Produces(MediaType.TEXT_HTML)
+	public String readDoctor() {
+		
+		return docObj.readDoctor();
+		
+	}
 	
 
 }
