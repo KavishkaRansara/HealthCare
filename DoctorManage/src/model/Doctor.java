@@ -168,6 +168,42 @@ public String insertDoctor(String doctorName, String specialization, String hosp
 
 	    }
 	
+	
+	public String deleteDoctor(String doctorID){
+
+		String output = "";
+
+		try{
+
+			Connection con = connect();
+			if (con == null){
+
+	         return "Error while connecting to the database for deleting.";
+	        }
+
+	        // create a prepared statement
+	        String query = "delete from doctors where docID=?";
+	        PreparedStatement preparedStmt = con.prepareStatement(query);
+	        // binding values
+	        preparedStmt.setInt(1, Integer.parseInt(doctorID));
+	        // execute the statement
+	        preparedStmt.execute();
+	        con.close();
+
+	        output = "Deleted successfully";
+
+
+		}catch (Exception e){
+
+			output = "Error while deleting the value.";
+			System.err.println(e.getMessage());
+		}
+
+		return output;
+	}
+	
+	
+	
 }	
 
 
