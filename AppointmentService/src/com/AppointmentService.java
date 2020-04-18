@@ -14,7 +14,7 @@ public class AppointmentService {
 	
 	Appointment appointmentObj = new Appointment(); 
 	
-	
+	//Get METHOD
 	@GET
 	@Path("/")
 	@Produces(MediaType.TEXT_HTML)
