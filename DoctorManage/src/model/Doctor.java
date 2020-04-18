@@ -124,6 +124,50 @@ public String insertDoctor(String doctorName, String specialization, String hosp
 	return output;
 }
 	
+	
+	
+	
+	public String updateDoctor(String doctorID, String doctorName, String specialization, String hospital, String contact, String email, String status){
+	    
+	    String output = "";
+
+	    try{
+
+	           Connection con = connect();
+	           if (con == null){
+	           return "Error while connecting to the database for updating.";
+	           }
+	           
+	           // create a prepared statement
+
+	           String query = "UPDATE doctors SET docName=?,docSpec=?,docHosp=?,docContact=?,docEmail=?,docStat=? WHERE docID=?";
+	           PreparedStatement preparedStmt = con.prepareStatement(query);
+
+	           preparedStmt.setString(1, doctorName);
+	           preparedStmt.setString(2, specialization);
+	           preparedStmt.setString(3, hospital);
+	           preparedStmt.setInt(4, Integer.parseInt(contact));
+	           preparedStmt.setString(5, email);
+	           preparedStmt.setString(6, status);
+	           preparedStmt.setInt(7, Integer.parseInt(doctorID));
+
+	           // execute the statement
+	           preparedStmt.execute();
+	           con.close();
+
+	           output = "Updated successfully";
+	           
+
+
+	        }catch(Exception e){
+	        	output = "Error while updating the value.";
+				System.err.println(e.getMessage());
+	        }
+
+	        return output;
+
+	    }
+	
 }	
 
 
