@@ -21,14 +21,9 @@ public class payment {
 		return con;
 	}
 
-//insert payment, while they paid the deletion will happen with this(the payment will delete from remain payment table)  
-	public String insertPayment() {
-		String msg = "";
 
-		return msg;
-	}
-	
-//update added amount and producing updatedd html table using multiple pruduces MediaType
+	// update added amount and producing updatedd html table using multiple pruduces
+	// MediaType
 	public String updatePaymentdetails(String payID, String patientID, String doctorID, String date, String amount,
 			String cardnumber, String postalnumber) {
 		String output = "";
@@ -73,7 +68,7 @@ public class payment {
 		return output;
 	}
 
-	// reading the payment details
+	// reading the payment details and produces the html tble
 	public String readpayment() {
 		String output = "";
 		try {
@@ -85,14 +80,8 @@ public class payment {
 				return "Error while connecting to the database for reading the appointmentdetails.";
 
 			}
-			output = "<table border=\"1\"><tr>" 
-					+ "<th>Payment ID</th>" 
-					+ "<th>patient ID</th>" 
-					+ "<th>doctor ID</th>"
-					+ "<th>Date</th>" 
-					+ "<th>Amount</th>" 
-					+ "<th>card number</th>" 
-					+ "<th>postal number</th></tr>";
+			output = "<table border=\"1\"><tr>" + "<th>Payment ID</th>" + "<th>patient ID</th>" + "<th>doctor ID</th>"
+					+ "<th>Date</th>" + "<th>Amount</th>" + "<th>card number</th>" + "<th>postal number</th></tr>";
 
 			String query = "select * from successpayment";
 
@@ -134,7 +123,8 @@ public class payment {
 
 	}
 
-	// implementing the payment logic
+	// implementing the payment logic and generate success massage and generate HTML
+	// table with help of multiple MediaType
 	public String payAppointment(String payID, String patientID, String doctorID, String date, String amount,
 			String cardnumber, String postalnumber) {
 		String msg = "";
@@ -150,10 +140,8 @@ public class payment {
 			// create a prepared statement
 			String query = " insert into successpayment (payID,patientID,doctorID,date,amount,cardnumber,postalnumber)"
 					+ " values (?,?,?,?,?,?,?)";
-			
 
 			java.sql.PreparedStatement preparedStmt = con.prepareStatement(query);
-			
 
 			// binding values to appointment table
 			preparedStmt.setInt(1, 0);
@@ -163,11 +151,9 @@ public class payment {
 			preparedStmt.setDouble(5, Double.parseDouble(amount));
 			preparedStmt.setInt(6, Integer.parseInt(cardnumber));
 			preparedStmt.setInt(7, Integer.parseInt(postalnumber));
-			
-			
+
 			preparedStmt.execute();
-			
-			
+
 			con.close();
 			msg = "Paid successfully";
 
@@ -178,10 +164,10 @@ public class payment {
 
 		return msg;
 	}
-	
-	//implement the delete payment
-public String paymentDelete(String payID) {
-		
+
+	// implement the delete payment and generate HTML table
+	public String paymentDelete(String payID) {
+
 		String output = "";
 
 		try {
@@ -205,7 +191,7 @@ public String paymentDelete(String payID) {
 			con.close();
 
 			output = " payment Deleted successfully.";
-			
+
 		} catch (Exception e) {
 
 			output = " An error occurred while deleting the payment details.";

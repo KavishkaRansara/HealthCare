@@ -26,7 +26,7 @@ import model.payment;
 public class paymentService {
 	payment pay = new payment();
 
-	// implementing the reading service for read the reamin payment
+	// implementing the reading service for read the success payment
 	@GET
 	@Path("/")
 	@Produces(MediaType.TEXT_HTML)
@@ -34,6 +34,7 @@ public class paymentService {
 		return pay.readpayment();
 	}
 
+	//implement the update micro service 
 	@PUT
 	@Path("/")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -50,7 +51,7 @@ public class paymentService {
 		String cardnumber = paymentObject.get("cardnumber").getAsString();
 		String postalnumber = paymentObject.get("postalnumber").getAsString();
 
-		String output = pay.updatePaymentdetails(payID, patientID, doctorID, date, amount,cardnumber,postalnumber);
+		String output = pay.updatePaymentdetails(payID, patientID, doctorID, date, amount, cardnumber, postalnumber);
 
 		return output + "" + pay.readpayment() + "";
 
@@ -71,22 +72,21 @@ public class paymentService {
 		String output = pay.payAppointment(payID, patientID, doctorID, date, amount, cardnumber, postalnumber);
 		return output + "" + pay.readpayment();
 	}
-	
-	
+
+	//implement the delete micro service
 	@DELETE
 	@Path("/")
 	@Consumes(MediaType.APPLICATION_XML)
 	@Produces({ MediaType.TEXT_PLAIN, MediaType.TEXT_HTML })
-	public String deleteItem(String paymentData)
-	{
-	//Convert the input string to an XML document
-	 org.jsoup.nodes.Document doc = Jsoup.parse(paymentData, "", Parser.xmlParser());
+	public String deleteItem(String paymentData) {
+		// Convert the input string to an XML document
+		org.jsoup.nodes.Document doc = Jsoup.parse(paymentData, "", Parser.xmlParser());
 
-	//Read the value from the element <payID>
-	 String payID = doc.select("payID").text();
-	 
-	 String output = pay.paymentDelete(payID);
-	return output +""+pay.readpayment();
+		// Read the value from the element <payID>
+		String payID = doc.select("payID").text();
+
+		String output = pay.paymentDelete(payID);
+		return output + "" + pay.readpayment();
 	}
 
 }
