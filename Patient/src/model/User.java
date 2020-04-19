@@ -6,7 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-public class Register {
+public class User {
 	
 	private Connection connect() {
 		Connection con = null;

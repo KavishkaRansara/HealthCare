@@ -1,6 +1,6 @@
 package com;
 
-import model.Register;
+import model.User;
 //For REST Service
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -11,9 +11,9 @@ import org.jsoup.*;
 import org.jsoup.parser.*;
 import org.jsoup.nodes.Document;
 
-@Path("/Registers")
-public class RegisterService {
-	Register registerObj = new Register();
+@Path("/user")
+public class UserService {
+	User registerObj = new User();
 
 	@GET
 	@Path("/")
