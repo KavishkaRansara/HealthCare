@@ -20,6 +20,15 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>Jersey Web Application4</servlet-name>
+		<url-pattern>/userService/*</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>Jersey Web Application5</servlet-name>
+		<servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
+		<load-on-startup>2</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Jersey Web Application4</servlet-name>
 		<url-pattern>/DoctorService/*</url-pattern>
 	</servlet-mapping>
 	<servlet>
