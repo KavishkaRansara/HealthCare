@@ -1,6 +1,6 @@
 package com;
 
-import model.Appointment;
+import com.Appointment;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import com.google.gson.*;
@@ -14,7 +14,7 @@ public class AppointmentService {
 	
 	Appointment appointmentObj = new Appointment(); 
 	
-	//Get METHOD
+	
 	@GET
 	@Path("/")
 	@Produces(MediaType.TEXT_HTML)
@@ -23,7 +23,7 @@ public class AppointmentService {
 		return appointmentObj.readAppointments();
 	}
 	
-	//POST METHOD
+
 	@POST 
 	@Path("/") 
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED) 
@@ -37,7 +37,7 @@ public class AppointmentService {
 		String output = appointmentObj.insertAppointments(patientID, doctorID, appointmentDate, appointmentTime);  
 		return output; 
 	}
-	//PUT METHOD
+	
 	@PUT 
 	@Path("/") @Consumes(MediaType.APPLICATION_JSON) 
 	@Produces(MediaType.TEXT_PLAIN)
@@ -56,7 +56,7 @@ public class AppointmentService {
 		 return output; 
 		 
 	}
-	//DELETE METHOD
+	
 	@DELETE 
 	@Path("/") 
 	@Consumes(MediaType.APPLICATION_XML) 
